@@ -1,0 +1,23 @@
+## xDNN v1.2.1
+
+- Add xdnn_small_amx_sgemm_bf16bf16bf16_packb implemention with transposed weight.
+
+## xDNN v1.2
+
+- Add xdnn_small_amx_sgemm_bf16bf16bf16_packb implemention.
+- Add xdnn_small_amx_sgemm_bf16bf16bf16_compute implemention.
+
+## xDNN v1.1
+
+- Add bgemm_f32bf16f32_packb weight format BA16a64b2a.
+- Add intrinsic extension api.
+
+## xDNN v1.0
+
+- Add sgemm kernels
+- Add sgemm_f32f16f32 kernels
+- Add sgemm_f32i8f32 kernels
+- Add hgemm_f32f16f32 kernels
+- Add hgemm_f16f16f32 kernels
+- Add hgemm_f32i8f32 kernels
+- Add bgemm_f32bf16f32 kernels
