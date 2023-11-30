@@ -31,8 +31,8 @@ $ cmake ..
 $ make -j
 
 # unit test
-$ numactl -N 1 -m 3 ./unit_test/test_sgemm
+$ numactl -N 0 -m 0 ./unit_test/test_sgemm
 
 # performance test
-$ numactl -N 1 -m 3 ./perf_test/benchmark_sgemm
+$ numactl -N 0 -m 0 ./perf_test/benchmark_sgemm
 ```
