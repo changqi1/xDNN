@@ -14,8 +14,14 @@ target_link_libraries(test_sgemm PRIVATE ${XDNN_LIB})
 add_executable(test_sgemm_f32f16f32 test_sgemm_f32f16f32.cpp)
 target_link_libraries(test_sgemm_f32f16f32 PRIVATE ${XDNN_LIB})
 
-add_executable(test_sgemm_f32i8f32 test_sgemm_f32i8f32.cpp)
-target_link_libraries(test_sgemm_f32i8f32 PRIVATE ${XDNN_LIB})
+add_executable(test_sgemm_f32s8f32 test_sgemm_f32s8f32.cpp)
+target_link_libraries(test_sgemm_f32s8f32 PRIVATE ${XDNN_LIB})
+
+add_executable(test_sgemm_f32u4f32 test_sgemm_f32u4f32.cpp)
+target_link_libraries(test_sgemm_f32u4f32 PRIVATE ${XDNN_LIB})
+
+add_executable(test_sgemm_f32nf4f32 test_sgemm_f32nf4f32.cpp)
+target_link_libraries(test_sgemm_f32nf4f32 PRIVATE ${XDNN_LIB})
 
 add_executable(test_hgemm_f16f16f32 test_hgemm_f16f16f32.cpp)
 target_link_libraries(test_hgemm_f16f16f32 PRIVATE ${XDNN_LIB})
@@ -26,8 +32,11 @@ target_link_libraries(test_hgemm_f32f16f16 PRIVATE ${XDNN_LIB})
 add_executable(test_hgemm_f32f16f32 test_hgemm_f32f16f32.cpp)
 target_link_libraries(test_hgemm_f32f16f32 PRIVATE ${XDNN_LIB})
 
-add_executable(test_hgemm_f32i8f32 test_hgemm_f32i8f32.cpp)
-target_link_libraries(test_hgemm_f32i8f32 PRIVATE ${XDNN_LIB})
+add_executable(test_hgemm_f32s8f32 test_hgemm_f32s8f32.cpp)
+target_link_libraries(test_hgemm_f32s8f32 PRIVATE ${XDNN_LIB})
+
+add_executable(test_hgemm_f32u4f32 test_hgemm_f32u4f32.cpp)
+target_link_libraries(test_hgemm_f32u4f32 PRIVATE ${XDNN_LIB})
 
 add_executable(test_bgemm_f32bf16f32 test_bgemm_f32bf16f32.cpp)
 target_link_libraries(test_bgemm_f32bf16f32 PRIVATE ${XDNN_LIB})

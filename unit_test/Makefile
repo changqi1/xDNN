@@ -13,7 +13,7 @@ ifeq "$(GCCVERSIONGTEQ7)" "0"
 	exit
 endif
 
-test: test_sgemm test_sgemm_f32f16f32 test_sgemm_f32i8f32 test_hgemm_f32f16f32 test_hgemm_f32f16f16 test_hgemm_f16f16f32 test_hgemm_f32i8f32 test_bgemm_f32bf16f32
+test: test_sgemm test_sgemm_f32f16f32 test_sgemm_f32s8f32 test_sgemm_f32u4f32 test_sgemm_f32nf4f32 test_hgemm_f32f16f32 test_hgemm_f32f16f16 test_hgemm_f16f16f32 test_hgemm_f32s8f32 test_hgemm_f32u4f32 test_bgemm_f32bf16f32
 
 test_sgemm: test_sgemm.cpp
 	$(CXX) $(CFLAGS) test_sgemm.cpp -o test_sgemm -I../include -L../lib lxdnn
@@ -21,8 +21,14 @@ test_sgemm: test_sgemm.cpp
 test_sgemm_f32f16f32: test_sgemm_f32f16f32.cpp
 	$(CXX) $(CFLAGS) test_sgemm_f32f16f32.cpp -o test_sgemm_f32f16f32 -I../include -L../lib lxdnn
 
-test_sgemm_f32i8f32: test_sgemm_f32i8f32.cpp
-	$(CXX) $(CFLAGS) test_sgemm_f32i8f32.cpp -o test_sgemm_f32i8f32 -I../include -L../lib lxdnn
+test_sgemm_f32s8f32: test_sgemm_f32s8f32.cpp
+	$(CXX) $(CFLAGS) test_sgemm_f32s8f32.cpp -o test_sgemm_f32s8f32 -I../include -L../lib lxdnn
+
+test_sgemm_f32u4f32: test_sgemm_f32u4f32.cpp
+	$(CXX) $(CFLAGS) test_sgemm_f32u4f32.cpp -o test_sgemm_f32u4f32 -I../include -L../lib lxdnn
+
+test_sgemm_f32nf4f32: test_sgemm_f32nf4f32.cpp
+	$(CXX) $(CFLAGS) test_sgemm_f32nf4f32.cpp -o test_sgemm_f32nf4f32 -I../include -L../lib lxdnn
 
 test_hgemm_f32f16f32: test_hgemm_f32f16f32.cpp
 	$(CXX) $(CFLAGS) test_hgemm_f32f16f32.cpp -o test_hgemm_f32f16f32 -I../include -L../lib lxdnn
@@ -33,11 +39,14 @@ test_hgemm_f32f16f16: test_hgemm_f32f16f16.cpp
 test_hgemm_f16f16f32: test_hgemm_f16f16f32.cpp
 	$(CXX) $(CFLAGS) test_hgemm_f16f16f32.cpp -o test_hgemm_f16f16f32 -I../include -L../lib lxdnn
 
-test_hgemm_f32i8f32: test_hgemm_f32i8f32.cpp
-	$(CXX) $(CFLAGS) test_hgemm_f32i8f32.cpp -o test_hgemm_f32i8f32 -I../include -L../lib lxdnn
+test_hgemm_f32s8f32: test_hgemm_f32s8f32.cpp
+	$(CXX) $(CFLAGS) test_hgemm_f32s8f32.cpp -o test_hgemm_f32s8f32 -I../include -L../lib lxdnn
+
+test_hgemm_f32u4f32: test_hgemm_f32u4f32.cpp
+	$(CXX) $(CFLAGS) test_hgemm_f32u4f32.cpp -o test_hgemm_f32u4f32 -I../include -L../lib lxdnn
 
 test_bgemm_f32bf16f32: test_bgemm_f32bf16f32.cpp
 	$(CXX) $(CFLAGS) test_bgemm_f32bf16f32.cpp -o test_bgemm_f32bf16f32 -I../include -L../lib lxdnn
 
 clean:
-	rm -f test_sgemm test_sgemm_f32f16f32 test_sgemm_f32i8f32 test_hgemm_f32f16f32 test_hgemm_f32f16f16 test_hgemm_f16f16f32 test_hgemm_f32i8f32 test_bgemm_f32bf16f32
+	rm -f test_sgemm test_sgemm_f32f16f32 test_sgemm_f32s8f32 test_sgemm_f32u4f32 test_sgemm_f32nf4f32 test_hgemm_f32f16f32 test_hgemm_f32f16f16 test_hgemm_f16f16f32 test_hgemm_f32s8f32 test_hgemm_f32u4f32 test_bgemm_f32bf16f32
