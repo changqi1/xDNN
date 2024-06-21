@@ -65,6 +65,31 @@ void test_xdnn_small_amx_sgemm_bf16bf16bf16_compute(int M, int N, int K, unsigne
     test_utils::validate(M, N, K, lda, ldb, ldc, refC.get(), C.get(), ACCURACY);
 }
 
+void test_xdnn_small_amx_sgemm_bf16bf16bf16_compute_nt(int M, int N, int K, unsigned int padA = 0, unsigned int padB = 0, unsigned int padC = 0) {
+    int lda = K + padA;
+    int ldb = K + padB;
+    int ldc = N + padC;
+    int packed_size = xdnn_small_amx_sgemm_bf16bf16bf16_packb_size(N, K, 32, 32);
+
+    ALLOC(XDNN_BF16, A, M * lda);
+    ALLOC(XDNN_BF16, B, N * ldb);
+    ALLOC(XDNN_BF16, packedB, packed_size);
+    ALLOC(XDNN_BF16, C, M * ldc);
+    ALLOC(float, refC, M * ldc);
+
+    test_utils::init(A.get(), M * lda, -3.00f, 3.00f);
+    test_utils::init(B.get(), N * ldb, -0.25f, 0.25f);
+
+    test_utils::gemm_ref(false, true, M, N, K, 1.0f, A.get(), lda, B.get(), ldb, 0.0f, refC.get(), ldc);
+
+    xdnn_small_amx_sgemm_bf16bf16bf16_packb(true, N, K, B.get(), ldb, packedB.get(), packed_size);
+    auto pB = B.get();
+    auto ppacked = packedB.get();
+    xdnn_small_amx_sgemm_bf16bf16bf16_compute(M, N, K, A.get(), lda, packedB.get(), C.get(), ldc); 
+
+    test_utils::validate(M, N, K, lda, ldb, ldc, refC.get(), C.get(), ACCURACY);
+}
+
 int main(int argc, char* argv[]) {
     srand(time(NULL));
 
@@ -74,9 +99,19 @@ int main(int argc, char* argv[]) {
         int k = std::stoi(argv[3]);
 
         test_xdnn_small_amx_sgemm_bf16bf16bf16_compute(m, n, k, 0, 0, 0);
-        // test_xdnn_small_amx_sgemm_bf16bf16bf16_compute(m, n, k, 4, 4, 4);
 
         return 0;
+    }
+
+    // Test the matmul needed in Q * Kᵀ
+    printf("Test xdnn_small_amx_sgemm_bf16bf16bf16_compute (B transposed):\n");
+    for (int m = 1; m <= 64; m += 1) {
+        for (int n = 1; n <= 64; n += 1) {
+            // K = 64, 128, 256
+            test_xdnn_small_amx_sgemm_bf16bf16bf16_compute_nt(m, n, 64, 0, 0, 0);
+            test_xdnn_small_amx_sgemm_bf16bf16bf16_compute_nt(m, n, 128, 0, 0, 0);
+            test_xdnn_small_amx_sgemm_bf16bf16bf16_compute_nt(m, n, 256, 0, 0, 0);
+        }
     }
 
     printf("Test xdnn_small_amx_sgemm_bf16bf16bf16_packb:\n");
@@ -94,7 +129,6 @@ int main(int argc, char* argv[]) {
     printf("Test xdnn_bgemm_f32bf16f32_compute:\n");
     for (int i = 0; i < sizeof(unit_mnk) / sizeof(unit_mnk[0]); ++i) {
         test_xdnn_small_amx_sgemm_bf16bf16bf16_compute(unit_mnk[i][0], unit_mnk[i][1], unit_mnk[i][2], 0, 0, 0);
-        // test_xdnn_small_amx_sgemm_bf16bf16bf16_compute(unit_mnk[i][0], unit_mnk[i][1], unit_mnk[i][2], 4, 4, 4);
     }
 
     return 0;

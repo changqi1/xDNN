@@ -29,6 +29,11 @@ void xdnn_sgemm_f32f16f32_compute_silu(bool transA, int M, int N, int K,
         float alpha, const float *A, int lda, const XDNN_FP16 *packedB,
         float beta, float *C, int ldc);
 
+// To compute sgemm w/o bias_add: C = GELU(alpha * A * packedB + beta * C)
+void xdnn_sgemm_f32f16f32_compute_gelu(bool transA, int M, int N, int K,
+        float alpha, const float *A, int lda, const XDNN_FP16 *packedB,
+        float beta, float *C, int ldc);
+
 // To compute sgemm w/ bias_add: C = alpha * A * (XDNN_FP16 *)packedB + beta * C + bias
 void xdnn_sgemm_f32f16f32_compute_biasadd(bool transA, int M, int N, int K,
         float alpha, const float *A, int lda, const XDNN_FP16 *packedB,

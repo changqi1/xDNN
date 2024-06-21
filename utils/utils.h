@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "data_types/data_types.h"
 #include "test.h"
 #include "timer.h"
 #include "unit_cases.h"

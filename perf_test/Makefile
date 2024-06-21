@@ -13,40 +13,31 @@ ifeq "$(GCCVERSIONGTEQ7)" "0"
 	exit
 endif
 
-benchmark: benchmark_sgemm benchmark_sgemm_f32f16f32 benchmark_sgemm_f32s8f32 benchmark_sgemm_f32u4f32 benchmark_sgemm_f32nf4f32 benchmark_hgemm_f32f16f32 benchmark_hgemm_f32f16f16 benchmark_hgemm_f16f16f32 benchmark_hgemm_f32s8f32 benchmark_hgemm_f32u4f32 benchmark_bgemm_f32bf16f32
+benchmark: benchmark_sgemm benchmark_sgemm_f32f16f32 benchmark_sgemm_f32s8f32 benchmark_hgemm_f32f16f32 benchmark_hgemm_f32f16f16 benchmark_hgemm_f16f16f32 benchmark_hgemm_f32s8f32 benchmark_bgemm_f32bf16f32
 
 benchmark_sgemm: benchmark_sgemm.cpp
-	$(CXX) $(CFLAGS) benchmark_sgemm.cpp -o benchmark_sgemm -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_sgemm.cpp -o benchmark_sgemm -I../include -L../lib -lxdnn
 
 benchmark_sgemm_f32f16f32: benchmark_sgemm_f32f16f32.cpp
-	$(CXX) $(CFLAGS) benchmark_sgemm_f32f16f32.cpp -o benchmark_sgemm_f32f16f32 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_sgemm_f32f16f32.cpp -o benchmark_sgemm_f32f16f32 -I../include -L../lib -lxdnn
 
 benchmark_sgemm_f32s8f32: benchmark_sgemm_f32s8f32.cpp
-	$(CXX) $(CFLAGS) benchmark_sgemm_f32s8f32.cpp -o benchmark_sgemm_f32s8f32 -I../include -L../lib lxdnn
-
-benchmark_sgemm_f32u4f32: benchmark_sgemm_f32u4f32.cpp
-	$(CXX) $(CFLAGS) benchmark_sgemm_f32u4f32.cpp -o benchmark_sgemm_f32u4f32 -I../include -L../lib lxdnn
-
-benchmark_sgemm_f32nf4f32: benchmark_sgemm_f32nf4f32.cpp
-	$(CXX) $(CFLAGS) benchmark_sgemm_f32nf4f32.cpp -o benchmark_sgemm_f32nf4f32 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_sgemm_f32s8f32.cpp -o benchmark_sgemm_f32s8f32 -I../include -L../lib -lxdnn
 
 benchmark_hgemm_f32f16f32: benchmark_hgemm_f32f16f32.cpp
-	$(CXX) $(CFLAGS) benchmark_hgemm_f32f16f32.cpp -o benchmark_hgemm_f32f16f32 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_hgemm_f32f16f32.cpp -o benchmark_hgemm_f32f16f32 -I../include -L../lib -lxdnn
 
 benchmark_hgemm_f32f16f16: benchmark_hgemm_f32f16f16.cpp
-	$(CXX) $(CFLAGS) benchmark_hgemm_f32f16f16.cpp -o benchmark_hgemm_f32f16f16 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_hgemm_f32f16f16.cpp -o benchmark_hgemm_f32f16f16 -I../include -L../lib -lxdnn
 
 benchmark_hgemm_f16f16f32: benchmark_hgemm_f16f16f32.cpp
-	$(CXX) $(CFLAGS) benchmark_hgemm_f16f16f32.cpp -o benchmark_hgemm_f16f16f32 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_hgemm_f16f16f32.cpp -o benchmark_hgemm_f16f16f32 -I../include -L../lib -lxdnn
 
 benchmark_hgemm_f32s8f32: benchmark_hgemm_f32s8f32.cpp
-	$(CXX) $(CFLAGS) benchmark_hgemm_f32s8f32.cpp -o benchmark_hgemm_f32s8f32 -I../include -L../lib lxdnn
-
-benchmark_hgemm_f32u4f32: benchmark_hgemm_f32u4f32.cpp
-	$(CXX) $(CFLAGS) benchmark_hgemm_f32u4f32.cpp -o benchmark_hgemm_f32u4f32 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_hgemm_f32s8f32.cpp -o benchmark_hgemm_f32s8f32 -I../include -L../lib -lxdnn
 
 benchmark_bgemm_f32bf16f32: benchmark_bgemm_f32bf16f32.cpp
-	$(CXX) $(CFLAGS) benchmark_bgemm_f32bf16f32.cpp -o benchmark_bgemm_f32bf16f32 -I../include -L../lib lxdnn
+	$(CXX) $(CFLAGS) benchmark_bgemm_f32bf16f32.cpp -o benchmark_bgemm_f32bf16f32 -I../include -L../lib -lxdnn
 
 clean:
-	rm -f benchmark_sgemm benchmark_sgemm_f32f16f32 benchmark_sgemm_f32s8f32 benchmark_sgemm_f32u4f32 benchmark_sgemm_f32nf4f32  benchmark_hgemm_f32f16f32 benchmark_hgemm_f32f16f16 benchmark_hgemm_f16f16f32 benchmark_hgemm_f32s8f32 benchmark_hgemm_f32u4f32 benchmark_bgemm_f32bf16f32
+	rm -f benchmark_sgemm benchmark_sgemm_f32f16f32 benchmark_sgemm_f32s8f32 benchmark_hgemm_f32f16f32 benchmark_hgemm_f32f16f16 benchmark_hgemm_f16f16f32 benchmark_hgemm_f32s8f32 benchmark_bgemm_f32bf16f32

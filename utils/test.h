@@ -23,14 +23,24 @@ public:
     for (int i = 0; i < M; ++i) {
       for (int j = 0; j < N; ++j) {
         // C[i,j] = SUM(A[i,k] * B[k,j])
-        TC sum = 0.0f;
-        for (int k = 0; k < K; ++k) {
-          sum += (TC)(A[i * lda + k] * B[k * ldb + j]);
+        if (!transB) {
+          TC sum = 0.0f;
+          for (int k = 0; k < K; ++k) {
+            sum += (TC)(A[i * lda + k] * B[k * ldb + j]);
 #if DEBUG
-          printf("%d %d %d: %f %f %f\n", i, j, k, A[i * lda + k], float(B[k * ldb + j]), sum);
+            printf("%d %d %d: %f %f %f\n", i, j, k, A[i * lda + k], float(B[k * ldb + j]), sum);
 #endif
+          }
+          C[i * ldc + j] = alpha * sum + beta * C[i * ldc + j];
         }
-        C[i * ldc + j] = alpha * sum + beta * C[i * ldc + j];
+        // C[i,j] = SUM(A[i,k] * B[j,k])
+        else {
+          TC sum = 0.0f;
+          for (int k = 0; k < K; ++k) {
+            sum += (TC)(A[i * lda + k] * B[j * ldb + k]);
+          }
+          C[i * ldc + j] = alpha * sum + beta * C[i * ldc + j];
+        }
       }
     }
   }

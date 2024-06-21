@@ -13,6 +13,7 @@ void xdnn_hgemm_f32f16f32(bool transA, bool transB, int M, int N, int K,
 // B is in K x N if transB = false
 // B is in N x K if transB = true
 void xdnn_hgemm_f32f16f32_packb(bool transB, int N, int K, const XDNN_FP16 *B, int ldb, XDNN_FP16 *packedB);
+void xdnn_hgemm_f32f16f32_packb_block(bool transB, int N, int K, const XDNN_FP16 *B, int ldb, XDNN_FP16 *packedB, int block_rows, int block_cols);
 
 // To compute sgemm: C = alpha * A * packedB + beta * C
 // Note: there is no ldb, as B is packed in compact format
@@ -22,6 +23,11 @@ void xdnn_hgemm_f32f16f32_compute(bool transA, int M, int N, int K,
 
 // To compute sgemm w/ bias_add: C = SILU(alpha * A * packedB + beta * C)
 void xdnn_hgemm_f32f16f32_compute_silu(bool transA, int M, int N, int K,
+        float alpha, const float *A, int lda, const XDNN_FP16 *packedB,
+        float beta, float *C, int ldc);
+
+// To compute sgemm w/o bias_add: C = GELU(alpha * A * packedB + beta * C)
+void xdnn_hgemm_f32f16f32_compute_gelu(bool transA, int M, int N, int K,
         float alpha, const float *A, int lda, const XDNN_FP16 *packedB,
         float beta, float *C, int ldc);
 

@@ -1,3 +1,29 @@
+## xDNN v1.5.1
+- Add xdnn_hgemm_f32f16f32_packb_block.
+
+## xDNN v1.5.0
+- Add hgemm w/ fp32 bias.
+
+## xDNN v1.4.6
+- Add alpha and beta param to small_sgemm_f32f16bf16.
+
+## xDNN v1.4.5
+- Add post op gelu activation.
+
+## xDNN v1.4.4
+- Fix AMX illegal instruction issue.
+
+## xDNN v1.4.3
+- Add small_sgemm_f32bf16bf16.
+- Add small_sgemm_f32f16bf16.
+
+## xDNN v1.4.2
+- Support amx_gemm_bf16bf16bf16 kernel w/ any shapes.
+
+## xDNN v1.4.1
+- Add sgemm_bf16bf16f32 and sgemm_f32bf16bf16 kernels.
+- Add softmax kernels.
+
 ## xDNN v1.4.0
 - Add hgemm_f32u4f32 kernels.
 - Add sgemm_f32nf4f32 kernels.

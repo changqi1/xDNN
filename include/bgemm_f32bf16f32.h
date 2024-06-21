@@ -27,6 +27,11 @@ void xdnn_bgemm_f32bf16f32_compute_silu(bool transA, int M, int N, int K,
         float alpha, const float *A, int lda, const XDNN_BF16 *packedB,
         float beta, float *C, int ldc);
 
+// To compute sgemm w/o bias_add: C = GELU(alpha * A * packedB + beta * C)
+void xdnn_bgemm_f32bf16f32_compute_gelu(bool transA, int M, int N, int K,
+        float alpha, const float *A, int lda, const XDNN_BF16 *packedB,
+        float beta, float *C, int ldc);
+
 // Extended residential
 // C = alpha * A * packedB + beta * C + bias + gamma * res
 // ldres, residential matrix stride
